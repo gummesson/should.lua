@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8 />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Should</title>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="l-header">
+      <h1 class="l-logo">
+        <a href="index.html" class="link--hidden">Should</a>
+      </h1>
+      <p class="smallprint">BDD-style assertions for Lua</p>
+    </header>
+    <article class="l-content">
+      <p><strong>Should</strong> is a library that brings BDD-style assertions to Lua.</p>
+      <p><a href="docs/index.html">The annotated source code is available</a>.
+<h2>API</h2>
+<p>The <code>message</code> in every assertion will be displayed if the assertion fails.</p>
+<h3>should.Equal / expect:toEqual</h3>
+<pre><code class="lua">should.Equal(actual, expected[, message])
+expect(actual):toEqual(expected[, message])</code></pre>
+<p>Determines if <code>actual</code> is equal to <code>expected</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Equal(<span class="number">1</span>, <span class="number">1</span>)
+expect(<span class="number">1</span>):toEqual(<span class="number">1</span>)</code></pre>
+<h3>should.Eql / expect:toEql</h3>
+<pre><code class="lua">should.Eql(actual, expected[, message])
+expect(actual):toEql(expected[, message])</code></pre>
+<p>Determines if the <code>actual</code> is equal to <code>expected</code> by doing a deep comparsion between them.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Eql({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}, {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>})
+expect({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}):toEql({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>})</code></pre>
+<h3>should.be.Type / expect:toBeType</h3>
+<pre><code class="lua">should.be.Type(actual, expected[, message])
+expect(actual):toBeType(expected[, message])</code></pre>
+<p>Determines if <code>actual</code> is a <code>type</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.be.Type(<span class="number">1</span>, <span class="string">'number'</span>)
+expect(<span class="number">1</span>):toBeType(<span class="string">'number'</span>)</code></pre>
+<h3>should.be.True / expect:toBeTrue</h3>
+<pre><code class="lua">should.be.True(actual[, message])
+expect(actual):toBeTrue([message])</code></pre>
+<p>Determines if <code>actual</code> is <code>true</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.be.True(<span class="keyword">true</span>)
+expect(<span class="keyword">true</span>):toBeTrue()</code></pre>
+<h3>should.be.False / expect:toBeFalse</h3>
+<pre><code class="lua">should.be.False(actual[, message])
+expect(actual):toBeFalse([message])</code></pre>
+<p>Determines if <code>actual</code> is <code>false</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.be.False(<span class="keyword">false</span>)
+expect(<span class="keyword">false</span>):toBeFalse()</code></pre>
+<h3>should.be.Nil / expect:toBeNil</h3>
+<pre><code class="lua">should.be.Nil(actual[, message])
+expect(actual):toBeNil([message])</code></pre>
+<p>Determines if <code>actual</code> is <code>nil</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.be.Nil(<span class="keyword">nil</span>)
+expect(<span class="keyword">false</span>):toBeNil()</code></pre>
+<h3>should.be.Error / expect:toBeError</h3>
+<pre><code class="lua">should.be.Error(actual[, message])
+expect(actual):toBeError([message])</code></pre>
+<p>Determines if <code>actual</code> returns an error.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.be.Error(<span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="built_in">error</span>(<span class="string">'Abort!'</span>) <span class="keyword">end</span>)
+expect(<span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="built_in">error</span>(<span class="string">'Abort!'</span>) <span class="keyword">end</span>):toBeError()</code></pre>
+<h3>should.be.Blank / expect:toBeBlank</h3>
+<pre><code class="lua">should.be.Blank(actual[, message])
+expect(actual):toBeBlank([message])</code></pre>
+<p>Determines if <code>actual</code> is blank.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.be.Blank(<span class="string">''</span>)
+expect(<span class="string">''</span>):toBeBlank()</code></pre>
+<h3>should.be.Empty / expect:toBeEmpty</h3>
+<pre><code class="lua">should.be.Empty(actual[, message])
+expect(actual):toBeEmpty([message])</code></pre>
+<p>Determines if <code>actual</code> is empty.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.be.Empty({})
+expect({}):toBeEmpty()</code></pre>
+<h3>should.be.Above / expect:toBeAbove</h3>
+<pre><code class="lua">should.be.Above(actual, expected[, message])
+expect(actual):toBeAbove(expected[, message])</code></pre>
+<p>Determines if <code>actual</code> is greater than <code>expected</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.be.Above(<span class="number">2</span>, <span class="number">1</span>)
+expect(<span class="number">2</span>):toBeAbove(<span class="number">1</span>)</code></pre>
+<h3>should.be.Gte / expect:toBeGte</h3>
+<pre><code class="lua">should.be.Gte(actual, expected[, message])
+expect(actual):toBeGte(expected[, message])</code></pre>
+<p>Determines if <code>actual</code> is greater than or equal to <code>expected</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.be.Gte(<span class="number">1</span>, <span class="number">1</span>)
+expect(<span class="number">1</span>):toBeGte(<span class="number">1</span>)</code></pre>
+<h3>should.be.Below / expect:toBeBelow</h3>
+<pre><code class="lua">should.be.Below(actual, expected[, message])
+expect(actual):toBeBelow(expected[, message])</code></pre>
+<p>Determines if <code>actual</code> is less than <code>expected</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.be.Below(<span class="number">1</span>, <span class="number">2</span>)
+expect(<span class="number">1</span>):toBeBelow(<span class="number">2</span>)</code></pre>
+<h3>should.be.Lte / expect:toBeLte</h3>
+<pre><code class="lua">should.be.Lte(actual, expected[, message])
+expect(actual):toBeLte(expected[, message])</code></pre>
+<p>Determines if <code>actual</code> is less than or equal to <code>expected</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.be.Lte(<span class="number">1</span>, <span class="number">1</span>)
+expect(<span class="number">1</span>):toBeLte(<span class="number">1</span>)</code></pre>
+<h3>should.Match / expect:toMatch</h3>
+<pre><code class="lua">should.Match(actual, expected[, message])
+expect(actual):toMatch(expected[, message])</code></pre>
+<p>Determines if <code>actual</code> match <code>expected</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Match(<span class="string">'Hello world'</span>, <span class="string">'world'</span>)
+expect(<span class="string">'Hello world'</span>):toMatch(<span class="string">'world'</span>)</code></pre>
+<h3>should.have.Property / expect:toHaveProperty</h3>
+<pre><code class="lua">should.have.Property(actual, expected[, message])
+expect(actual):toHaveProperty(expected[, message])</code></pre>
+<p>Determines if <code>actual</code> has the property <code>expected</code>.</p>
+<h4>Examples</h4>
+<pre><code class="lua">should.have.Property({one = <span class="number">1</span>, two = <span class="number">2</span>}, <span class="string">'two'</span>)
+expect({one = <span class="number">1</span>, two = <span class="number">2</span>}):toHaveProperty(<span class="string">'two'</span>)</code></pre>
+<pre><code class="lua">should.have.Property({one = <span class="number">1</span>, two = <span class="number">2</span>}, {two = <span class="number">2</span>})
+expect({one = <span class="number">1</span>, two = <span class="number">2</span>}):toHaveProperty({two = <span class="number">2</span>})</code></pre>
+<h3>should.Not.Equal / expect:notToEqual</h3>
+<pre><code class="lua">should.Not.Equal(actual, expected[, message])
+expect(actual):notToEqual(expected[, message])</code></pre>
+<p>Determines if <code>actual</code> is not equal to <code>expected</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Not.Equal(<span class="number">1</span>, <span class="string">'Hello'</span>)
+expect(<span class="number">1</span>):notToEqual(<span class="string">'Hello'</span>)</code></pre>
+<h3>should.Not.Eql / expect:notToEql</h3>
+<pre><code class="lua">should.Not.Eql(actual, expected[, message])
+expect(actual):notToEqual(expected[, message])</code></pre>
+<p>Determines if the <code>actual</code> is not equal to the <code>expected</code> by doing a deep comparsion between them.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Not.Eql({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}, {<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>})
+expect({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}):notToEql({<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>})</code></pre>
+<h3>should.Not.be.Type / expect:notToBeType</h3>
+<pre><code class="lua">should.Not.be.Type(actual, expected[, message])
+expect(actual):notToBeType(expected[, message])</code></pre>
+<p>Determines if <code>actual</code> is not a <code>type</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Not.be.Type(<span class="number">1</span>, <span class="string">'boolean'</span>)
+expect(<span class="number">1</span>):notToBeType(<span class="string">'boolean'</span>)</code></pre>
+<h3>should.Not.be.True / expect:notToBeTrue</h3>
+<pre><code class="lua">should.Not.be.True(actual[, message])
+expect(actual):notToBeTrue()</code></pre>
+<p>Determines if <code>actual</code> is not <code>true</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Not.be.True(<span class="keyword">false</span>)
+expect(<span class="keyword">false</span>):notToBeTrue()</code></pre>
+<h3>should.Not.be.False / expect:notToBeFalse</h3>
+<pre><code class="lua">should.Not.be.False(actual[, message])
+expect(actual):notToBeFalse()</code></pre>
+<p>Determines if <code>actual</code> is not <code>false</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Not.be.False(<span class="keyword">true</span>)
+expect(<span class="keyword">true</span>):notToBeFalse()</code></pre>
+<h3>should.Not.be.Nil / expect:notToBeNil</h3>
+<pre><code class="lua">should.Not.be.Nil(actual[, message])
+expect(actual):notToBeNil([message])</code></pre>
+<p>Determines if <code>actual</code> is not <code>nil</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Not.be.Nil(<span class="string">'Hello'</span>)
+expect(<span class="string">'Hello'</span>):notToBeNil()</code></pre>
+<h3>should.Not.be.Error / expect:notToBeError</h3>
+<pre><code class="lua">should.Not.be.Error(actual[, message])
+expect(actual):notToBeError()</code></pre>
+<p>Determines if <code>actual</code> doesn&#39;t return an error.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Not.be.Error(<span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="built_in">print</span>(<span class="string">'Continue!'</span>) <span class="keyword">end</span>)
+expect(<span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="built_in">print</span>(<span class="string">'Continue!'</span>) <span class="keyword">end</span>):notToBeError()</code></pre>
+<h3>should.Not.be.Blank / expect:notToBeBlank</h3>
+<pre><code class="lua">should.Not.be.Blank(actual[, message])
+expect(actual):notToBeBlank()</code></pre>
+<p>Determines if <code>actual</code> is not blank.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Not.be.Blank(<span class="string">'Hello'</span>)
+expect(<span class="string">'Hello'</span>):notToBeBlank()</code></pre>
+<h3>should.Not.be.Empty / expect:notToBeEmpty</h3>
+<pre><code class="lua">should.Not.be.Empty(actual[, message])
+expect(actual):notToBeEmpty()</code></pre>
+<p>Determines if <code>actual</code> is not empty.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Not.be.Empty({<span class="number">1</span>})
+expect({<span class="number">1</span>}):notToBeEmpty()</code></pre>
+<h3>should.Not.be.Above / expect:notToBeAbove</h3>
+<pre><code class="lua">should.Not.be.Above(actual, expected[, message])
+expect(actual).notToBeAbove(expected[, message])</code></pre>
+<p>Determines if <code>actual</code> is not greater than <code>expected</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Not.be.Above(<span class="number">1</span>, <span class="number">2</span>)
+expect(<span class="number">1</span>):notToBeAbove(<span class="number">2</span>)</code></pre>
+<h3>should.Not.be.Gte / expect:notToBeGte</h3>
+<pre><code class="lua">should.Not.be.Gte(actual, expected[, message])
+expect(actual).notToBeGte(expected[, message])</code></pre>
+<p>Determines if <code>actual</code> is not greater than or equal to <code>expected</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Not.be.Gte(<span class="number">1</span>, <span class="number">2</span>)
+expect(<span class="number">1</span>):notToBeGte(<span class="number">2</span>)</code></pre>
+<h3>should.Not.be.Below / expect:notToBeBelow</h3>
+<pre><code class="lua">should.Not.be.Below(actual, expected[, message])
+expect(actual).notToBeBelow(expected[, message])</code></pre>
+<p>Determines if <code>actual</code> is not less than <code>expected</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Not.be.Below(<span class="number">2</span>, <span class="number">1</span>)
+expect(<span class="number">2</span>):notToBeBelow(<span class="number">1</span>)</code></pre>
+<h3>should.Not.be.Lte / expect:notToBeLte</h3>
+<pre><code class="lua">should.Not.be.Lte(actual, expected[, message])
+expect(actual).notToBeLte(expected[, message])</code></pre>
+<p>Determines if <code>actual</code> is not less than or equal to <code>expected</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Not.be.Lte(<span class="number">2</span>, <span class="number">1</span>)
+expect(<span class="number">2</span>):notToBeLte(<span class="number">1</span>)</code></pre>
+<h3>should.Not.Match / expect:notToMatch</h3>
+<pre><code class="lua">should.Not.Match(actual, expected[, message])
+expect(actual):notToMatch(expected[, message])</code></pre>
+<p>Determines if <code>actual</code> doesn&#39;t match <code>expected</code>.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Not.Match(<span class="string">'Hello world'</span>, <span class="string">'everybody'</span>)
+expect(<span class="string">'Hello world'</span>):notToMatch(<span class="string">'everybody'</span>)</code></pre>
+<h3>should.Not.have.Property / expect:notToHaveProperty</h3>
+<pre><code class="lua">should.Not.have.Property(actual, expected[, message])
+expect(actual):notToHaveProperty(expected[, message])</code></pre>
+<p>Determines if <code>actual</code> doesn&#39;t have the property <code>expected</code>.</p>
+<h4>Examples</h4>
+<pre><code class="lua">should.Not.have.Property({one = <span class="number">1</span>, two = <span class="number">2</span>}, <span class="string">'three'</span>)
+expect({one = <span class="number">1</span>, two = <span class="number">2</span>}):notToHaveProperty(<span class="string">'three'</span>)</code></pre>
+<pre><code class="lua">should.Not.have.Property({one = <span class="number">1</span>, two = <span class="number">2</span>}, {three = <span class="number">3</span>})
+expect({one = <span class="number">1</span>, two = <span class="number">2</span>}):notToHaveProperty({three = <span class="number">3</span>})</code></pre>
+    </article>
+    <footer class="l-footer">
+      <p class="smallprint">Another small thing by <a href="http://ellengummesson.com/">Ellen Gummesson</a>. <a href="https://github.com/gummesson/should.lua">Source on GitHub</a>.</p>
+    </footer>
+  </div>
+</body>
+</html>

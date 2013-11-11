@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>should</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h1">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <h1>should</h1>
+<p><strong>Should</strong> is a library that brings BDD-style assertions to Lua.</p>
+<p><strong>License:</strong> MIT<br> <strong>Source:</strong> <a href="https://github.com/gummesson/should.lua">GitHub</a></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h2>Modules</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="keyword">local</span> util = <span class="built_in">require</span>(<span class="string">'should.util'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <h2>should</h2>
+<p>The namespace.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">local</span> should = {}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <h3>References</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="keyword">local</span> <span class="built_in">assert</span>, <span class="built_in">type</span> = <span class="built_in">assert</span>, <span class="built_in">type</span>
+
+<span class="keyword">local</span> assertMsg = util.assertMsg
+<span class="keyword">local</span> compare   = util.compare
+<span class="keyword">local</span> throws    = util.throws
+<span class="keyword">local</span> blank     = util.blank
+<span class="keyword">local</span> empty     = util.empty
+<span class="keyword">local</span> above     = util.above
+<span class="keyword">local</span> gte       = util.gte
+<span class="keyword">local</span> below     = util.below
+<span class="keyword">local</span> lte       = util.lte
+<span class="keyword">local</span> match     = util.match
+<span class="keyword">local</span> property  = util.property</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <h3>Namespaces</h3>
+<p>Use tables to create namespaces for the assertions.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>should.be       = {}
+should.have     = {}
+should.Not      = {}
+should.Not.be   = {}
+should.Not.have = {}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <h3>Assertions</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <h4>should.Equal</h4>
+<p>Determine if <code>actual</code> is equal to <code>expected</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>   is a value.</li>
+<li><code>expected</code> is a value.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Equal</span><span class="params">(actual, expected, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual, expected)
+  <span class="built_in">assert</span>(actual == expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <h4>should.Eql</h4>
+<p>Determine if the <code>actual</code> is equal to <code>expected</code> by doing
+a deep comparsion between them.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>   is a table.</li>
+<li><code>expected</code> is a table.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Eql</span><span class="params">(actual, expected, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual, expected)
+  <span class="built_in">assert</span>(compare(actual, expected) == <span class="keyword">true</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <h4>should.be.Type</h4>
+<p>Determine if <code>actual</code> is a <code>type</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>   is a type.</li>
+<li><code>expected</code> is a string.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.be.Type</span><span class="params">(actual, expected, message)</span></span>
+  actual  = <span class="built_in">type</span>(actual)
+  message = message <span class="keyword">or</span> assertMsg(actual, expected)
+  <span class="built_in">assert</span>(actual == expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <h4>should.be.True</h4>
+<p>Determine if <code>actual</code> is <code>true</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>  is a value.</li>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.be.True</span><span class="params">(actual, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual, <span class="keyword">true</span>)
+  <span class="built_in">assert</span>(actual == <span class="keyword">true</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <h4>should.be.False</h4>
+<p>Determine if <code>actual</code> is <code>false</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>  is a value.</li>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.be.False</span><span class="params">(actual, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual, <span class="keyword">false</span>)
+  <span class="built_in">assert</span>(actual == <span class="keyword">false</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <h4>should.be.Nil</h4>
+<p>Determine if <code>actual</code> is <code>nil</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>  is a value.</li>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.be.Nil</span><span class="params">(actual, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual, <span class="keyword">nil</span>)
+  <span class="built_in">assert</span>(actual == <span class="keyword">nil</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <h4>should.be.Error</h4>
+<p>Determine if <code>actual</code> returns an error.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>  is a function.</li>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.be.Error</span><span class="params">(actual, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(<span class="string">'no error'</span>, <span class="string">'error'</span>)
+  <span class="built_in">assert</span>(throws(actual) == <span class="keyword">true</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <h4>should.be.Blank</h4>
+<p>Determine if <code>actual</code> is blank.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>  is a value.</li>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.be.Blank</span><span class="params">(actual, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual, <span class="string">'\'\' or nil'</span>)
+  <span class="built_in">assert</span>(blank(actual) == <span class="keyword">true</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <h4>should.be.Empty</h4>
+<p>Determine if <code>actual</code> is empty.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>  is a table.</li>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.be.Empty</span><span class="params">(actual, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual, <span class="string">'{ }'</span>)
+  <span class="built_in">assert</span>(empty(actual) == <span class="keyword">true</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <h4>should.be.Above</h4>
+<p>Determine if <code>actual</code> is greater than <code>expected</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>   is a number.</li>
+<li><code>expected</code> is a number.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.be.Above</span><span class="params">(actual, expected, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual .. <span class="string">' &lt; '</span> .. expected, actual .. <span class="string">' &gt; '</span> .. expected)
+  <span class="built_in">assert</span>(above(actual, expected) == <span class="keyword">true</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <h4>should.be.Gte</h4>
+<p>Determine if <code>actual</code> is greater than or equal to <code>expected</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>   is a number.</li>
+<li><code>expected</code> is a number.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.be.Gte</span><span class="params">(actual, expected, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual .. <span class="string">' &lt;= '</span> .. expected, actual .. <span class="string">' &gt;= '</span> .. expected)
+  <span class="built_in">assert</span>(gte(actual, expected) == <span class="keyword">true</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <h4>should.be.Below</h4>
+<p>Determine if <code>actual</code> is less than <code>expected</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>  is a number.</li>
+<li><code>expected</code>   is a number.</li>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.be.Below</span><span class="params">(actual, expected, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual .. <span class="string">' &gt; '</span> .. expected, actual .. <span class="string">' &lt; '</span> .. expected)
+  <span class="built_in">assert</span>(below(actual, expected) == <span class="keyword">true</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <h4>should.be.Lte</h4>
+<p>Determine if <code>actual</code> is less than or equal to <code>expected</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>  is a number.</li>
+<li><code>expected</code>   is a number.</li>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.be.Lte</span><span class="params">(actual, expected, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual .. <span class="string">' &gt;= '</span> .. expected, actual .. <span class="string">' &lt;= '</span> .. expected)
+  <span class="built_in">assert</span>(lte(actual, expected) == <span class="keyword">true</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <h4>should.Match</h4>
+<p>Determine if <code>actual</code> match <code>expected</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>   is a string.</li>
+<li><code>expected</code> is a string.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Match</span><span class="params">(actual, expected, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual, <span class="string">'/'</span> .. expected .. <span class="string">'/'</span>)
+  <span class="built_in">assert</span>(match(actual, expected) ~= <span class="keyword">nil</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <h4>should.have.Property</h4>
+<p>Determine if <code>actual</code> have the property <code>expected</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>   is a table.</li>
+<li><code>expected</code> is table or a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.have.Property</span><span class="params">(actual, expected, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(<span class="string">'nil'</span>, expected)
+  <span class="built_in">assert</span>(property(actual, expected) == <span class="keyword">true</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <h4>should.Not.Equal</h4>
+<p>Determine if <code>actual</code> is not equal to <code>expected</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>   is a value.</li>
+<li><code>expected</code> is a value.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Not.Equal</span><span class="params">(actual, expected, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual, expected)
+  <span class="built_in">assert</span>(actual ~= expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <h4>should.Not.Eql</h4>
+<p>Determine if the <code>actual</code> is not equal to the <code>expected</code> by doing
+a deep comparsion between them.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>   is a table.</li>
+<li><code>expected</code> is a table.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Not.Eql</span><span class="params">(actual, expected, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual, expected, <span class="keyword">true</span>)
+  <span class="built_in">assert</span>(compare(actual, expected) == <span class="keyword">false</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <h4>should.Not.be.Type</h4>
+<p>Determine if <code>actual</code> is not a <code>type</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>   is a type.</li>
+<li><code>expected</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Not.be.Type</span><span class="params">(actual, expected, message)</span></span>
+  actual  = <span class="built_in">type</span>(actual)
+  message = message <span class="keyword">or</span> assertMsg(actual, <span class="string">'no '</span> .. expected)
+  <span class="built_in">assert</span>(actual ~= expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <h4>should.Not.be.True</h4>
+<p>Determine if <code>actual</code> is not <code>true</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>  is a value.</li>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Not.be.True</span><span class="params">(actual, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual, <span class="string">'not true'</span>)
+  <span class="built_in">assert</span>(actual ~= <span class="keyword">true</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <h4>should.Not.be.False</h4>
+<p>Determine if <code>actual</code> is not <code>false</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>  is a value.</li>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Not.be.False</span><span class="params">(actual, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual, <span class="string">'not false'</span>)
+  <span class="built_in">assert</span>(actual ~= <span class="keyword">false</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <h4>should.not.be.Nil</h4>
+<p>Determine if <code>actual</code> is not <code>nil</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>  is a value.</li>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Not.be.Nil</span><span class="params">(actual, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual, <span class="string">'not nil'</span>)
+  <span class="built_in">assert</span>(actual ~= <span class="keyword">nil</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <h4>should.Not.be.Error</h4>
+<p>Determine if <code>actual</code> doesn&#39;t return an error.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>  is a function.</li>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Not.be.Error</span><span class="params">(actual, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(<span class="string">'no error'</span>, <span class="string">'error'</span>)
+  <span class="built_in">assert</span>(throws(actual) == <span class="keyword">false</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <h4>should.Not.be.Blank</h4>
+<p>Determine if <code>actual</code> is not blank.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>  is a value.</li>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Not.be.Blank</span><span class="params">(actual, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual, <span class="string">'not \'\' or nil'</span>)
+  <span class="built_in">assert</span>(blank(actual) == <span class="keyword">false</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <h4>should.Not.be.Empty</h4>
+<p>Determine if <code>actual</code> is not empty.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>  is a table.</li>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Not.be.Empty</span><span class="params">(actual, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual, <span class="string">'not empty'</span>)
+  <span class="built_in">assert</span>(empty(actual) == <span class="keyword">false</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <h4>should.Not.be.Above</h4>
+<p>Determine if <code>actual</code> is not greater than <code>expected</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>   is a number.</li>
+<li><code>expected</code> is a number.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Not.be.Above</span><span class="params">(actual, expected, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual .. <span class="string">' &gt; '</span> .. expected, actual .. <span class="string">' &lt; '</span> .. expected)
+  <span class="built_in">assert</span>(above(actual, expected) == <span class="keyword">false</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <h4>should.Not.be.Gte</h4>
+<p>Determine if <code>actual</code> is not greater than or equal to <code>expected</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>   is a number.</li>
+<li><code>expected</code> is a number.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Not.be.Gte</span><span class="params">(actual, expected, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual .. <span class="string">' &gt;= '</span> .. expected, actual .. <span class="string">' &lt;= '</span> .. expected)
+  <span class="built_in">assert</span>(gte(actual, expected) == <span class="keyword">false</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <h4>should.Not.be.Below</h4>
+<p>Determine if <code>actual</code> is not less than <code>expected</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>   is a number.</li>
+<li><code>expected</code> is a number.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Not.be.Below</span><span class="params">(actual, expected, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual .. <span class="string">' &lt; '</span> .. expected, actual .. <span class="string">' &gt; '</span> .. expected)
+  <span class="built_in">assert</span>(below(actual, expected) == <span class="keyword">false</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <h4>should.Not.be.Lte</h4>
+<p>Determine if <code>actual</code> is not less than or equal to <code>expected</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>   is a number.</li>
+<li><code>expected</code> is a number.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Not.be.Lte</span><span class="params">(actual, expected, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual .. <span class="string">' &lt;= '</span> .. expected, actual .. <span class="string">' &gt;= '</span> .. expected)
+  <span class="built_in">assert</span>(lte(actual, expected) == <span class="keyword">false</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <h4>should.Not.Match</h4>
+<p>Determine if <code>actual</code> doesn&#39;t match <code>expected</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>   is a string.</li>
+<li><code>expected</code> is a string.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Not.Match</span><span class="params">(actual, expected, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(actual, <span class="string">'not /'</span> .. expected .. <span class="string">'/'</span>)
+  <span class="built_in">assert</span>(match(actual, expected) == <span class="keyword">nil</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <h4>should.Not.have.Property</h4>
+<p>Determine if <code>actual</code> doesn&#39;t have the property <code>expected</code>.</p>
+<p>The <code>message</code> will be displayed if the assertion fails.</p>
+<ul>
+<li><code>actual</code>   is a table.</li>
+<li><code>expected</code> is table or a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">should.Not.have.Property</span><span class="params">(actual, expected, message)</span></span>
+  message = message <span class="keyword">or</span> assertMsg(expected, <span class="string">'nil'</span>)
+  <span class="built_in">assert</span>(property(actual, expected) == <span class="keyword">false</span>, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <h2>Exports</h2>
+<p>Export <code>should</code> as a Lua module.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">return</span> should</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h1">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <h1>Expect</h1>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-39">&#182;</a>
+              </div>
+              <h2>Modules</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="keyword">local</span> should = <span class="built_in">require</span>(<span class="string">'should'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-40">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-40">&#182;</a>
+              </div>
+              <h2>expect</h2>
+<p>The namespace.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">local</span> expect = {}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-41">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-41">&#182;</a>
+              </div>
+              <h3>expect:new</h3>
+<p>Create a new instance of <code>expect</code> and assign <code>actual</code>
+to <code>self.__actual</code>.</p>
+<ul>
+<li><code>actual</code> is anything testable.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:new</span><span class="params">(actual)</span></span>
+  <span class="keyword">local</span> obj = {}
+  <span class="built_in">setmetatable</span>(obj, self)
+  self.__index = self
+  self.__actual = actual
+  <span class="keyword">return</span> obj
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-42">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-42">&#182;</a>
+              </div>
+              <h3>Assertions</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-43">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-43">&#182;</a>
+              </div>
+              <h4>expect:toEqual</h4>
+<p>A wrapper for <code>should.Equal</code>.</p>
+<ul>
+<li><code>expected</code> is a value.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:toEqual</span><span class="params">(expected, message)</span></span>
+  should.Equal(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-44">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-44">&#182;</a>
+              </div>
+              <h4>expect:toEql</h4>
+<p>A wrapper for <code>should.Eql</code>.</p>
+<ul>
+<li><code>expected</code> is a table.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:toEql</span><span class="params">(expected, message)</span></span>
+  should.Eql(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-45">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-45">&#182;</a>
+              </div>
+              <h4>expect:toBeType</h4>
+<p>A wrapper for <code>should.be.Type</code>.</p>
+<ul>
+<li><code>expected</code> is a string.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:toBeType</span><span class="params">(expected, message)</span></span>
+  should.be.Type(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-46">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-46">&#182;</a>
+              </div>
+              <h4>expect:toBeTrue</h4>
+<p>A wrapper for <code>should.be.True</code>.</p>
+<ul>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:toBeTrue</span><span class="params">(message)</span></span>
+  should.be.True(self.__actual, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-47">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-47">&#182;</a>
+              </div>
+              <h4>expect:toBeFalse</h4>
+<p>A wrapper for <code>should.be.False</code>.</p>
+<ul>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:toBeFalse</span><span class="params">(message)</span></span>
+  should.be.False(self.__actual, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-48">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-48">&#182;</a>
+              </div>
+              <h4>expect:toBeNil</h4>
+<p>A wrapper for <code>should.be.Nil</code>.</p>
+<ul>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:toBeNil</span><span class="params">(message)</span></span>
+  should.be.Nil(self.__actual, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-49">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-49">&#182;</a>
+              </div>
+              <h4>expect:toBeError</h4>
+<p>A wrapper for <code>should.be.Error</code>.</p>
+<ul>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:toBeError</span><span class="params">(message)</span></span>
+  should.be.Error(self.__actual, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-50">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-50">&#182;</a>
+              </div>
+              <h4>expect:toBeBlank</h4>
+<p>A wrapper for <code>should.be.Blank</code>.</p>
+<ul>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:toBeBlank</span><span class="params">(message)</span></span>
+  should.be.Blank(self.__actual, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-51">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-51">&#182;</a>
+              </div>
+              <h4>expect:toBeEmpty</h4>
+<p>A wrapper for <code>should.be.Empty</code>.</p>
+<ul>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:toBeEmpty</span><span class="params">(message)</span></span>
+  should.be.Empty(self.__actual, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-52">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-52">&#182;</a>
+              </div>
+              <h4>expect:toBeAbove</h4>
+<p>A wrapper for <code>should.be.Above</code>.</p>
+<ul>
+<li><code>expected</code> is a number.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:toBeAbove</span><span class="params">(expected, message)</span></span>
+  should.be.Above(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-53">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-53">&#182;</a>
+              </div>
+              <h4>expect:toBeGte</h4>
+<p>A wrapper for <code>should.be.Gte</code>.</p>
+<ul>
+<li><code>expected</code> is a number.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:toBeGte</span><span class="params">(expected, message)</span></span>
+  should.be.Gte(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-54">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-54">&#182;</a>
+              </div>
+              <h4>expect:toBeBelow</h4>
+<p>A wrapper for <code>should.be.Below</code>.</p>
+<ul>
+<li><code>expected</code> is a number.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:toBeBelow</span><span class="params">(expected, message)</span></span>
+  should.be.Below(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-55">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-55">&#182;</a>
+              </div>
+              <h4>expect:toBeLte</h4>
+<p>A wrapper for <code>should.be.Lte</code>.</p>
+<ul>
+<li><code>expected</code> is a number.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:toBeLte</span><span class="params">(expected, message)</span></span>
+  should.be.Lte(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-56">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-56">&#182;</a>
+              </div>
+              <h4>expect:toMatch</h4>
+<p>A wrapper for <code>should.Match</code>.</p>
+<ul>
+<li><code>expected</code> is a string.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:toMatch</span><span class="params">(expected, message)</span></span>
+  should.Match(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-57">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-57">&#182;</a>
+              </div>
+              <h4>expect:toHaveProperty</h4>
+<p>A wrapper for <code>should.have.Property</code>.</p>
+<ul>
+<li><code>expected</code> is a table or a string.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:toHaveProperty</span><span class="params">(expected, message)</span></span>
+  should.have.Property(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-58">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-58">&#182;</a>
+              </div>
+              <h4>expect:notToEqual</h4>
+<p>A wrapper for <code>should.Not.Equal</code>.</p>
+<ul>
+<li><code>expected</code> is a value.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:notToEqual</span><span class="params">(expected, message)</span></span>
+  should.Not.Equal(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-59">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-59">&#182;</a>
+              </div>
+              <h4>expect:notToEql</h4>
+<p>A wrapper for <code>should.Not.Eql</code>.</p>
+<ul>
+<li><code>expected</code> is a table.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:notToEql</span><span class="params">(expected, message)</span></span>
+  should.Not.Eql(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-60">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-60">&#182;</a>
+              </div>
+              <h4>expect:notToBeType</h4>
+<p>A wrapper for <code>should.Not.be.Type</code>.</p>
+<ul>
+<li><code>expected</code> is a type.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:notToBeType</span><span class="params">(expected, message)</span></span>
+  should.Not.be.Type(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-61">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-61">&#182;</a>
+              </div>
+              <h4>expect:notToBeTrue</h4>
+<p>A wrapper for <code>should.Not.be.True</code>.</p>
+<ul>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:notToBeTrue</span><span class="params">(message)</span></span>
+  should.Not.be.True(self.__actual, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-62">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-62">&#182;</a>
+              </div>
+              <h4>expect:notToBeFalse</h4>
+<p>A wrapper for <code>should.Not.be.False</code>.</p>
+<ul>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:notToBeFalse</span><span class="params">(message)</span></span>
+  should.Not.be.False(self.__actual, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-63">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-63">&#182;</a>
+              </div>
+              <h4>expect:notToBeNil</h4>
+<p>A wrapper for <code>should.Not.be.Nil</code>.</p>
+<ul>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:notToBeNil</span><span class="params">(message)</span></span>
+  should.Not.be.Nil(self.__actual, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-64">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-64">&#182;</a>
+              </div>
+              <h4>expect:notToBeError</h4>
+<p>A wrapper for <code>should.Not.be.Error</code>.</p>
+<ul>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:notToBeError</span><span class="params">(message)</span></span>
+  should.Not.be.Error(self.__actual, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-65">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-65">&#182;</a>
+              </div>
+              <h4>expect:notToBeBlank</h4>
+<p>A wrapper for <code>should.Not.be.Blank</code>.</p>
+<ul>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:notToBeBlank</span><span class="params">(message)</span></span>
+  should.Not.be.Blank(self.__actual, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-66">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-66">&#182;</a>
+              </div>
+              <h4>expect:notToBeEmpty</h4>
+<p>A wrapper for <code>should.Not.be.Empty</code>.</p>
+<ul>
+<li><code>message</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:notToBeEmpty</span><span class="params">(message)</span></span>
+  should.Not.be.Empty(self.__actual, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-67">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-67">&#182;</a>
+              </div>
+              <h4>expect:notToBeAbove</h4>
+<p>A wrapper for <code>should.Not.be.Above</code>.</p>
+<ul>
+<li><code>expected</code> is a number.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:notToBeAbove</span><span class="params">(expected, message)</span></span>
+  should.Not.be.Above(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-68">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-68">&#182;</a>
+              </div>
+              <h4>expect:notToBeGte</h4>
+<p>A wrapper for <code>should.Not.be.Gte</code>.</p>
+<ul>
+<li><code>expected</code> is a number.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:notToBeGte</span><span class="params">(expected, message)</span></span>
+  should.Not.be.Gte(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-69">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-69">&#182;</a>
+              </div>
+              <h4>expect:notToBeBelow</h4>
+<p>A wrapper for <code>should.Not.be.Below</code>.</p>
+<ul>
+<li><code>expected</code> is a number.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:notToBeBelow</span><span class="params">(expected, message)</span></span>
+  should.Not.be.Below(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-70">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-70">&#182;</a>
+              </div>
+              <h4>expect:notToBeLte</h4>
+<p>A wrapper for <code>should.Not.be.Lte</code>.</p>
+<ul>
+<li><code>expected</code> is a number.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:notToBeLte</span><span class="params">(expected, message)</span></span>
+  should.Not.be.Lte(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-71">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-71">&#182;</a>
+              </div>
+              <h4>expect:notToMatch</h4>
+<p>A wrapper for <code>should.Not.Match</code>.</p>
+<ul>
+<li><code>expected</code> is a string.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:notToMatch</span><span class="params">(expected, message)</span></span>
+  should.Not.Match(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-72">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-72">&#182;</a>
+              </div>
+              <h4>expect:notToHaveProperty</h4>
+<p>A wrapper for <code>should.Not.have.Property</code>.</p>
+<ul>
+<li><code>expected</code> is a table or a string.</li>
+<li><code>message</code>  is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">expect:notToHaveProperty</span><span class="params">(expected, message)</span></span>
+  should.Not.have.Property(self.__actual, expected, message)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-73">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-73">&#182;</a>
+              </div>
+              <h2>Exports</h2>
+<p>Export <code>expect.new</code> as a Lua module.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">return</span> <span class="built_in">setmetatable</span>(expect, {
+  __call = expect.new
+})</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-74">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h1">
+                <a class="pilcrow" href="#section-74">&#182;</a>
+              </div>
+              <h1>Util</h1>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-75">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-75">&#182;</a>
+              </div>
+              <h2>Modules</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="keyword">local</span> inspect = <span class="built_in">require</span>(<span class="string">'inspect'</span>)
+<span class="keyword">local</span> colors  = <span class="built_in">require</span>(<span class="string">'ansicolors'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-76">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-76">&#182;</a>
+              </div>
+              <h2>util</h2>
+<p>The namespace.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">local</span> util = {}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-77">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-77">&#182;</a>
+              </div>
+              <h3>References</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="keyword">local</span> <span class="built_in">type</span>, <span class="built_in">pairs</span>, <span class="built_in">pcall</span> = <span class="built_in">type</span>, <span class="built_in">pairs</span>, <span class="built_in">pcall</span>
+<span class="keyword">local</span> <span class="built_in">next</span>, <span class="built_in">tostring</span>     = <span class="built_in">next</span>, <span class="built_in">tostring</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-78">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-78">&#182;</a>
+              </div>
+              <h3>util.assertMsg</h3>
+<p>Return a formatted assertion message.</p>
+<ul>
+<li><code>actual</code>   is a value.</li>
+<li><p><code>expected</code> is a value.</p>
+</li>
+<li><p><code>NoEql</code> is an internal hack for appending “not” to <code>expected</code>
+if it&#39;s a table.</p>
+</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">util.assertMsg</span><span class="params">(actual, expected, noEql)</span></span>
+  <span class="keyword">if</span> <span class="built_in">type</span>(actual) == <span class="string">'table'</span> <span class="keyword">then</span>
+    actual = inspect(actual)
+  <span class="keyword">end</span>
+  <span class="keyword">if</span> <span class="built_in">type</span>(expected) == <span class="string">'table'</span> <span class="keyword">then</span>
+    <span class="keyword">if</span> noEql <span class="keyword">then</span>
+      expected = <span class="string">'not '</span> .. inspect(expected)
+    <span class="keyword">else</span>
+      expected = inspect(expected)
+    <span class="keyword">end</span>
+  <span class="keyword">end</span>
+  <span class="keyword">local</span> actMsg  = <span class="string">'\n'</span> .. <span class="string">'  Actual: '</span> .. colors(<span class="string">'%{red}'</span> .. <span class="built_in">tostring</span>(actual))
+  <span class="keyword">local</span> expMsg  = <span class="string">'\n'</span> .. <span class="string">'Expected: '</span> .. colors(<span class="string">'%{green}'</span> .. <span class="built_in">tostring</span>(expected))
+  <span class="keyword">local</span> asrtMsg = <span class="string">'\n'</span> .. actMsg .. expMsg
+  <span class="keyword">return</span> asrtMsg
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-79">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-79">&#182;</a>
+              </div>
+              <h3>util.compare</h3>
+<p>Do a deep comparsion between the <code>actual</code> and the <code>expected</code> table.</p>
+<ul>
+<li><code>actual</code>   is an table.</li>
+<li><code>expected</code> is an table.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">util.compare</span><span class="params">(actual, expected)</span></span>
+  <span class="keyword">if</span> actual == expected <span class="keyword">then</span>
+    <span class="keyword">return</span> <span class="keyword">true</span>
+  <span class="keyword">end</span>
+  <span class="keyword">if</span> <span class="built_in">type</span>(actual) ~= <span class="string">'table'</span> <span class="keyword">or</span> <span class="built_in">type</span>(expected) ~= <span class="string">'table'</span> <span class="keyword">then</span>
+    <span class="keyword">return</span> <span class="keyword">false</span>
+  <span class="keyword">end</span>
+  <span class="keyword">for</span> i, value <span class="keyword">in</span> <span class="built_in">pairs</span>(actual) <span class="keyword">do</span>
+    <span class="keyword">local</span> key = expected[i]
+    <span class="keyword">if</span> value ~= key <span class="keyword">and</span> <span class="keyword">not</span> util.compare(value, key) <span class="keyword">then</span>
+      <span class="keyword">return</span> <span class="keyword">false</span>
+    <span class="keyword">end</span>
+  <span class="keyword">end</span>
+  <span class="keyword">for</span> i, _ <span class="keyword">in</span> <span class="built_in">pairs</span>(expected) <span class="keyword">do</span>
+    <span class="keyword">if</span> actual[i] == <span class="keyword">nil</span> <span class="keyword">then</span>
+      <span class="keyword">return</span> <span class="keyword">false</span>
+    <span class="keyword">end</span>
+  <span class="keyword">end</span>
+  <span class="keyword">return</span> <span class="keyword">true</span>
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-80">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-80">&#182;</a>
+              </div>
+              <h3>util.throws(actual)</h3>
+<p>Determine if the <code>actual</code> has any errors.</p>
+<ul>
+<li><code>actual</code> is a function.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">util.throws</span><span class="params">(actual)</span></span>
+  <span class="keyword">return</span> <span class="keyword">not</span> <span class="built_in">pcall</span>(actual)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-81">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-81">&#182;</a>
+              </div>
+              <h3>util.blank(actual)</h3>
+<p>Determine if <code>actual</code> is blank.</p>
+<ul>
+<li><code>actual</code> is a value.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">util.blank</span><span class="params">(actual)</span></span>
+  <span class="keyword">return</span> actual == <span class="string">''</span> <span class="keyword">or</span> actual == <span class="keyword">nil</span>
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-82">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-82">&#182;</a>
+              </div>
+              <h3>util.empty(actual)</h3>
+<p>Determine if <code>actual</code> is empty.</p>
+<ul>
+<li><code>actual</code> is a table.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">util.empty</span><span class="params">(actual)</span></span>
+  <span class="keyword">return</span> <span class="keyword">not</span> <span class="built_in">next</span>(actual)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-83">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-83">&#182;</a>
+              </div>
+              <h3>util.above(actual, expected)</h3>
+<p>Determine if <code>actual</code> is greater than <code>expected</code>.</p>
+<ul>
+<li><code>actual</code>   is a number.</li>
+<li><code>expected</code> is a number.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">util.above</span><span class="params">(actual, expected)</span></span>
+  <span class="keyword">return</span> actual &gt; expected
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-84">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-84">&#182;</a>
+              </div>
+              <h3>util.gte(actual, expected)</h3>
+<p>Determine if <code>actual</code> is greater than or equal to <code>expected</code>.</p>
+<ul>
+<li><code>actual</code>   is a number.</li>
+<li><code>expected</code> is a number.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">util.gte</span><span class="params">(actual, expected)</span></span>
+  <span class="keyword">return</span> actual &gt;= expected
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-85">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-85">&#182;</a>
+              </div>
+              <h3>util.below(actual, expected)</h3>
+<p>Determine if <code>actual</code> is less than <code>expected</code>.</p>
+<ul>
+<li><code>actual</code>   is a number.</li>
+<li><code>expected</code> is a number.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">util.below</span><span class="params">(actual, expected)</span></span>
+  <span class="keyword">return</span> actual &lt; expected
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-86">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-86">&#182;</a>
+              </div>
+              <h3>util.lte(actual, expected)</h3>
+<p>Determine if <code>actual</code> is less than or equal to <code>expected</code>.</p>
+<ul>
+<li><code>actual</code>   is a number.</li>
+<li><code>expected</code> is a number.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">util.lte</span><span class="params">(actual, expected)</span></span>
+  <span class="keyword">return</span> actual &lt;= expected
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-87">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-87">&#182;</a>
+              </div>
+              <h3>util.match(actual, expected)</h3>
+<p>Determine if <code>actual</code> match <code>expected</code>.</p>
+<ul>
+<li><code>actual</code>   is a string.</li>
+<li><code>expected</code> is a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">util.match</span><span class="params">(actual, expected)</span></span>
+  <span class="keyword">return</span> (<span class="built_in">tostring</span>(actual)):match(expected)
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-88">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-88">&#182;</a>
+              </div>
+              <h3>util.property(actual, expected)</h3>
+<p>Detemine if <code>actual</code> have the property <code>expected</code>.</p>
+<ul>
+<li><code>actual</code>   is a table.</li>
+<li><code>expected</code> is table or a string.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="keyword">function</span> <span class="title">util.property</span><span class="params">(actual, expected)</span></span>
+  <span class="keyword">if</span> <span class="built_in">type</span>(actual) ~= <span class="string">'table'</span> <span class="keyword">then</span>
+    <span class="keyword">return</span> <span class="keyword">false</span>
+  <span class="keyword">end</span>
+  <span class="keyword">if</span> <span class="built_in">type</span>(expected) == <span class="string">'string'</span> <span class="keyword">then</span>
+    <span class="keyword">for</span> key, _ <span class="keyword">in</span> <span class="built_in">pairs</span>(actual) <span class="keyword">do</span>
+      <span class="keyword">if</span> key == expected <span class="keyword">then</span>
+        <span class="keyword">return</span> <span class="keyword">true</span>
+      <span class="keyword">end</span>
+    <span class="keyword">end</span>
+  <span class="keyword">end</span>
+  <span class="keyword">if</span> <span class="built_in">type</span>(expected) == <span class="string">'table'</span> <span class="keyword">then</span>
+    <span class="keyword">for</span> key, value <span class="keyword">in</span> <span class="built_in">pairs</span>(actual) <span class="keyword">do</span>
+      <span class="keyword">if</span> value == expected[key] <span class="keyword">then</span>
+        <span class="keyword">return</span> <span class="keyword">true</span>
+      <span class="keyword">end</span>
+    <span class="keyword">end</span>
+  <span class="keyword">end</span>
+  <span class="keyword">return</span> <span class="keyword">false</span>
+<span class="keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-89">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-89">&#182;</a>
+              </div>
+              <h2>Exports</h2>
+<p>Export <code>util</code> as a Lua module.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">return</span> util</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
