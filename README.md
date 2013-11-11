@@ -10,6 +10,12 @@ It's designed to be a companion to [Busted](https://github.com/Olivine-Labs/bust
 
 I love Busted but I'm not a fan of the word "assert".
 
+## Installation
+
+~~~
+luarocks build https://raw.github.com/gummesson/should.lua/master/should-dev-1.rockspec
+~~~
+
 ## Assertions
 
 ### should / expect
