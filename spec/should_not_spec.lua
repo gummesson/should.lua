@@ -5,205 +5,219 @@ local should = require('should')
 -- Tests
 
 describe('should', function()
-  describe('.Equal()', function()
-    it('should handle "true == true"', function()
+  describe('.Not.Equal()', function()
+    it('should handle "true ~= false"', function()
       local results = true
-      should.Equal(true, true)
-      should.Equal(results, true)
+      should.Not.Equal(true, false)
+      should.Not.Equal(results, false)
     end)
 
-    it('should handle "false == false"', function()
+    it('should handle "false ~= true"', function()
       local results = false
-      should.Equal(false, false)
-      should.Equal(results, false)
+      should.Not.Equal(false, true)
+      should.Not.Equal(results, true)
     end)
 
-    it('should handle "nil == nil"', function()
+    it('should handle "nil ~= 0"', function()
       local results = nil
-      should.Equal(nil, nil)
-      should.Equal(results, nil)
+      should.Not.Equal(nil, 0)
+      should.Not.Equal(results, 0)
     end)
 
-    it('should handle "\'Hello\' == \'Hello\'"', function()
+    it('should handle "\'Hello\' ~= \'world\'"', function()
       local results = 'Hello'
-      should.Equal('Hello', 'Hello')
-      should.Equal(results, 'Hello')
+      should.Not.Equal('Hello', 'world')
+      should.Not.Equal(results, 'world')
     end)
 
-    it('should handle "1 == 1"', function()
-      should.Equal(1, 1)
-    end)
-  end)
-
-  describe('.Eql()', function()
-    it('should handle "{1, 2, 3} == {1, 2, 3}"', function()
-      local results = {1, 2, 3}
-      should.Eql({1, 2, 3}, {1, 2, 3})
-      should.Eql(results, {1, 2, 3})
-    end)
-
-    it('should handle "{a = 1, b = 2, c = 3} == {a = 1, b = 2, c = 3}"', function()
-      local results = {a = 1, b = 2, c = 3}
-      should.Eql({a = 1, b = 2, c = 3}, {a = 1, b = 2, c = 3})
-      should.Eql(results, {a = 1, b = 2, c = 3})
-    end)
-  end)
-
-  describe('.be.Type()', function()
-    it('should handle "string"', function()
-      local results = 'Hello'
-      should.be.Type('Hello', 'string')
-      should.be.Type(results, 'string')
-    end)
-
-    it('should handle "number"', function()
+    it('should handle "1 ~= 2', function()
       local results = 1
-      should.be.Type(1, 'number')
-      should.be.Type(results, 'number')
+      should.Not.Equal(1, 2)
+      should.Not.Equal(results, 2)
+    end)
+  end)
+
+  describe('.Not.Eql()', function()
+    it('should handle "{1, 2, 3} ~= {4, 5, 6}"', function()
+      local results = {1, 2, 3}
+      should.Not.Eql({1, 2, 3}, {4, 5, 6})
+      should.Not.Eql(results, {4, 5, 6})
     end)
 
-    it('should handle "table"', function()
+    it('should handle "{a = 1, b = 2, c = 3} ~= {a = 4, b = 5, c = 6}"', function()
+      local results = {a = 1, b = 2, c = 3}
+      should.Not.Eql({a = 1, b = 2, c = 3}, {a = 4, b = 5, c = 6})
+      should.Not.Eql(results, {a = 4, b = 5, c = 6})
+    end)
+  end)
+
+  describe('.Not.be.Type()', function()
+    it('should handle "not function"', function()
+      local results = 'Hello'
+      should.Not.be.Type('Hello', 'function')
+      should.Not.be.Type(results, 'function')
+    end)
+
+    it('should handle "not string"', function()
+      local results = 1
+      should.Not.be.Type(1, 'string')
+      should.Not.be.Type(results, 'string')
+    end)
+
+    it('should handle "not number"', function()
       local results = {}
-      should.be.Type({}, 'table')
-      should.be.Type(results, 'table')
+      should.Not.be.Type({}, 'number')
+      should.Not.be.Type(results, 'number')
     end)
 
-    it('should handle "boolean"', function()
+    it('should handle "not table"', function()
       local results = true
-      should.be.Type(true, 'boolean')
-      should.be.Type(results, 'boolean')
+      should.Not.be.Type(true, 'table')
+      should.Not.be.Type(results, 'table')
     end)
 
-    it('should handle "nil"', function()
+    it('should handle "not boolean"', function()
       local results = nil
-      should.be.Type(nil, 'nil')
-      should.be.Type(results, 'nil')
+      should.Not.be.Type(nil, 'boolean')
+      should.Not.be.Type(results, 'boolean')
     end)
 
-    it('should handle "function"', function()
+    it('should handle "not nil"', function()
       local results = function() end
-      should.be.Type(function() end, 'function')
-      should.be.Type(results, 'function')
+      should.Not.be.Type(function() end, 'nil')
+      should.Not.be.Type(results, 'nil')
     end)
   end)
 
-  describe('.be.True()', function()
-    it('should handle "true"', function()
-      local results = true
-      should.be.True(true)
-      should.be.True(results)
-    end)
-  end)
-
-  describe('.be.False()', function()
+  describe('.Not.be.True()', function()
     it('should handle "false"', function()
       local results = false
-      should.be.False(false)
-      should.be.False(results)
-    end)
-  end)
-
-  describe('.be.Nil()', function()
-    it('should handle "nil"', function()
-      local results = nil
-      should.be.Nil(nil)
-      should.be.Nil(results)
-    end)
-  end)
-
-  describe('.be.Error()', function()
-    it('should handle errors', function()
-      local results = function() error('Test') end
-      should.be.Error(function() error('Test') end)
-      should.be.Error(results)
-    end)
-  end)
-
-  describe('.be.Blank()', function()
-    it('should handle empty strings', function()
-      local results = ''
-      should.be.Blank('')
-      should.be.Blank(results)
+      should.Not.be.True(false)
+      should.Not.be.True(results)
     end)
 
     it('should handle "nil"', function()
       local results = nil
-      should.be.Blank(nil)
-      should.be.Blank(results)
+      should.Not.be.True(nil)
+      should.Not.be.True(results)
     end)
   end)
 
-  describe('.be.Empty()', function()
-    it('should handle empty table', function()
-      local results = {}
-      should.be.Empty({})
-      should.be.Empty(results)
+  describe('.Not.be.False()', function()
+    it('should handle "true"', function()
+      local results = true
+      should.Not.be.False(true)
+      should.Not.be.False(results)
+    end)
+
+    it('should handle "nil"', function()
+      local results = nil
+      should.Not.be.False(nil)
+      should.Not.be.False(results)
     end)
   end)
 
-  describe('.be.Above()', function()
-    it('should handle "2 > 1"', function()
-      local results = 2
-      should.be.Above(2, 1)
-      should.be.Above(results, 1)
+  describe('.Not.be.Nil()', function()
+    it('should handle "true"', function()
+      local results = true
+      should.Not.be.Nil(true)
+      should.Not.be.Nil(results)
+    end)
+
+    it('should handle "false"', function()
+      local results = false 
+      should.Not.be.Nil(false)
+      should.Not.be.Nil(results)
     end)
   end)
 
-  describe('.be.Gte()', function()
-    it('should handle "2 >= 1"', function()
-      local results = 2
-      should.be.Gte(2, 1)
-      should.be.Gte(results, 1)
-    end)
-
-    it('should handle "2 >= 2"', function()
-      local results = 2
-      should.be.Gte(2, 2)
-      should.be.Gte(results, 2)
+  describe('.Not.be.Error()', function()
+    it('should handle non-errors', function()
+      local results = function() end
+      should.Not.be.Error(function() end)
+      should.Not.be.Error(results)
     end)
   end)
 
-  describe('.be.Below()', function()
+  describe('.Not.be.Blank()', function()
+    it('should handle "Hello world"', function()
+      local results = 'Hello world'
+      should.Not.be.Blank('Hello world')
+      should.Not.be.Blank(results)
+    end)
+
+    it('should handle "true"', function()
+      local results = true
+      should.Not.be.Blank(true)
+      should.Not.be.Blank(results)
+    end)
+  end)
+
+  describe('.Not.be.Empty()', function()
+    it('should handle "{1}"', function()
+      local results = {1}
+      should.Not.be.Empty({1})
+      should.Not.be.Empty(results)
+    end)
+
+    it('should handle "{one = 1}"', function()
+      local results = {one = 1}
+      should.Not.be.Empty({one = 1})
+      should.Not.be.Empty(results)
+    end)
+  end)
+
+  describe('.Not.be.Above()', function()
     it('should handle "1 < 2"', function()
       local results = 1
-      should.be.Below(1, 2)
-      should.be.Below(results, 2)
+      should.Not.be.Above(1, 2)
+      should.Not.be.Above(results, 2)
     end)
   end)
 
-  describe('.be.Lte()', function()
+  describe('.Not.be.Gte()', function()
     it('should handle "1 <= 2"', function()
       local results = 1
-      should.be.Lte(1, 2)
-      should.be.Lte(results, 2)
-    end)
-
-    it('should handle "1 <= 1"', function()
-      local results = 1
-      should.be.Lte(1, 1)
-      should.be.Lte(results, 1)
+      should.Not.be.Gte(1, 2)
+      should.Not.be.Gte(results, 2)
     end)
   end)
 
-  describe('.Match()', function()
-    it('should handle "\'Hello world\' == /world/"', function()
+  describe('.Not.be.Below()', function()
+    it('should handle "2 > 1"', function()
+      local results = 2
+      should.Not.be.Below(2, 1)
+      should.Not.be.Below(results, 1)
+    end)
+  end)
+
+  describe('.Not.be.Lte()', function()
+    it('should handle "2 >= 1"', function()
+      local results = 2
+      should.Not.be.Lte(2, 1)
+      should.Not.be.Lte(results, 1)
+    end)
+  end)
+
+  describe('.Not.Match()', function()
+    it('should handle "\'Hello world\' ~= \'test\'"', function()
       local results = 'Hello world'
-      should.Match('Hello world', 'world')
-      should.Match(results, 'world')
+      should.Not.Match('Hello world', 'test')
+      should.Not.Match(results, 'test')
     end)
   end)
 
-  describe('.have.Property()', function()
-    it('should handle "{one = 1, two = 2} == \'two\'"', function()
+  describe('.Not.have.Property()', function()
+    it('should handle "{ one = 1, two = 2 } ~= \'three\'"', function()
       local results = {one = 1, two = 2}
-      should.have.Property({one = 1, two = 2}, 'two')
-      should.have.Property(results, 'two')
+      should.Not.have.Property({one = 1, two = 2}, 'three')
+      should.Not.have.Property(results, 'three')
     end)
 
-    it('should handle "{one = 1, two = 2} == {two = 2}"', function()
+    it('should handle "{one = 1, two = 2} ~= {three = 3}"', function()
       local results = {one = 1, two = 2}
-      should.have.Property({one = 1, two = 2}, {two = 2})
-      should.have.Property(results, {two = 2})
+      should.Not.have.Property({one = 1, two = 2}, {three = 3})
+      should.Not.have.Property(results, {three = 3})
     end)
   end)
 end)

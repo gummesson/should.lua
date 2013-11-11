@@ -52,37 +52,37 @@ describe('expect', function()
   end)
 
   describe(':notToBeType()', function()
-    it('should handle "function"', function()
+    it('should handle "not function"', function()
       local results = 'Hello'
       expect('Hello'):notToBeType('function')
       expect(results):notToBeType('function')
     end)
 
-    it('should handle "string"', function()
+    it('should handle "not string"', function()
       local results = 1
       expect(1):notToBeType('string')
       expect(results):notToBeType('string')
     end)
 
-    it('should handle "number"', function()
+    it('should handle "not number"', function()
       local results = {}
       expect({}):notToBeType('number')
       expect(results):notToBeType('number')
     end)
 
-    it('should handle "table"', function()
+    it('should handle "not table"', function()
       local results = true
       expect(true):notToBeType('table')
       expect(results):notToBeType('table')
     end)
 
-    it('should handle "boolean"', function()
+    it('should handle "not boolean"', function()
       local results = nil
       expect(nil):notToBeType('boolean')
       expect(results):notToBeType('boolean')
     end)
 
-    it('should handle "nil"', function()
+    it('should handle "not nil"', function()
       local results = function() end
       expect(function() end):notToBeType('nil')
       expect(results):notToBeType('nil')
