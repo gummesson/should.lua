@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/gummesson/should.lua.png?branch=master)](https://travis-ci.org/gummesson/should.lua)
 
-**Should** is a small library that brings BDD-style assertions to Lua.
+**Should** is a library that brings BDD-style assertions to Lua.
 
 It's designed to be a companion to [Busted](https://github.com/Olivine-Labs/busted), but should work independently too.
 
