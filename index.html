@@ -64,13 +64,6 @@ expect(actual):toBeNil([message])</code></pre>
 <h4>Example</h4>
 <pre><code class="lua">should.be.Nil(<span class="keyword">nil</span>)
 expect(<span class="keyword">false</span>):toBeNil()</code></pre>
-<h3>should.be.Error / expect:toBeError</h3>
-<pre><code class="lua">should.be.Error(actual[, message])
-expect(actual):toBeError([message])</code></pre>
-<p>Determines if <code>actual</code> returns an error.</p>
-<h4>Example</h4>
-<pre><code class="lua">should.be.Error(<span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="built_in">error</span>(<span class="string">'Abort!'</span>) <span class="keyword">end</span>)
-expect(<span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="built_in">error</span>(<span class="string">'Abort!'</span>) <span class="keyword">end</span>):toBeError()</code></pre>
 <h3>should.be.Blank / expect:toBeBlank</h3>
 <pre><code class="lua">should.be.Blank(actual[, message])
 expect(actual):toBeBlank([message])</code></pre>
@@ -129,6 +122,13 @@ expect(actual):toHaveProperty(expected[, message])</code></pre>
 expect({one = <span class="number">1</span>, two = <span class="number">2</span>}):toHaveProperty(<span class="string">'two'</span>)</code></pre>
 <pre><code class="lua">should.have.Property({one = <span class="number">1</span>, two = <span class="number">2</span>}, {two = <span class="number">2</span>})
 expect({one = <span class="number">1</span>, two = <span class="number">2</span>}):toHaveProperty({two = <span class="number">2</span>})</code></pre>
+<h3>should.have.Error / expect:toHaveError</h3>
+<pre><code class="lua">should.have.Error(actual[, message])
+expect(actual):toHaveError([message])</code></pre>
+<p>Determines if <code>actual</code> returns an error.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.have.Error(<span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="built_in">error</span>(<span class="string">'Abort!'</span>) <span class="keyword">end</span>)
+expect(<span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="built_in">error</span>(<span class="string">'Abort!'</span>) <span class="keyword">end</span>):toHaveError()</code></pre>
 <h3>should.Not.Equal / expect:notToEqual</h3>
 <pre><code class="lua">should.Not.Equal(actual, expected[, message])
 expect(actual):notToEqual(expected[, message])</code></pre>
@@ -171,13 +171,6 @@ expect(actual):notToBeNil([message])</code></pre>
 <h4>Example</h4>
 <pre><code class="lua">should.Not.be.Nil(<span class="string">'Hello'</span>)
 expect(<span class="string">'Hello'</span>):notToBeNil()</code></pre>
-<h3>should.Not.be.Error / expect:notToBeError</h3>
-<pre><code class="lua">should.Not.be.Error(actual[, message])
-expect(actual):notToBeError()</code></pre>
-<p>Determines if <code>actual</code> doesn&#39;t return an error.</p>
-<h4>Example</h4>
-<pre><code class="lua">should.Not.be.Error(<span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="built_in">print</span>(<span class="string">'Continue!'</span>) <span class="keyword">end</span>)
-expect(<span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="built_in">print</span>(<span class="string">'Continue!'</span>) <span class="keyword">end</span>):notToBeError()</code></pre>
 <h3>should.Not.be.Blank / expect:notToBeBlank</h3>
 <pre><code class="lua">should.Not.be.Blank(actual[, message])
 expect(actual):notToBeBlank()</code></pre>
@@ -236,6 +229,13 @@ expect(actual):notToHaveProperty(expected[, message])</code></pre>
 expect({one = <span class="number">1</span>, two = <span class="number">2</span>}):notToHaveProperty(<span class="string">'three'</span>)</code></pre>
 <pre><code class="lua">should.Not.have.Property({one = <span class="number">1</span>, two = <span class="number">2</span>}, {three = <span class="number">3</span>})
 expect({one = <span class="number">1</span>, two = <span class="number">2</span>}):notToHaveProperty({three = <span class="number">3</span>})</code></pre>
+<h3>should.Not.have.Error / expect:notToHaveError</h3>
+<pre><code class="lua">should.Not.have.Error(actual[, message])
+expect(actual):notToHaveError()</code></pre>
+<p>Determines if <code>actual</code> doesn&#39;t return an error.</p>
+<h4>Example</h4>
+<pre><code class="lua">should.Not.have.Error(<span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="built_in">print</span>(<span class="string">'Continue!'</span>) <span class="keyword">end</span>)
+expect(<span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="built_in">print</span>(<span class="string">'Continue!'</span>) <span class="keyword">end</span>):notToHaveError()</code></pre>
     </article>
     <footer class="l-footer">
       <p class="smallprint">Another small thing by <a href="http://ellengummesson.com/">Ellen Gummesson</a>. <a href="https://github.com/gummesson/should.lua">Source on GitHub</a>.</p>
