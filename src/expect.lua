@@ -90,16 +90,6 @@ function expect:toBeNil(message)
   should.be.Nil(self.__actual, message)
 end
 
--- #### expect:toBeError
---
--- A wrapper for `should.be.Error`.
---
--- - `message` is a string.
---
-function expect:toBeError(message)
-  should.be.Error(self.__actual, message)
-end
-
 -- #### expect:toBeBlank
 --
 -- A wrapper for `should.be.Blank`.
@@ -185,6 +175,16 @@ function expect:toHaveProperty(expected, message)
   should.have.Property(self.__actual, expected, message)
 end
 
+-- #### expect:toHaveError
+--
+-- A wrapper for `should.be.Error`.
+--
+-- - `message` is a string.
+--
+function expect:toHaveError(message)
+  should.have.Error(self.__actual, message)
+end
+
 -- #### expect:notToEqual
 --
 -- A wrapper for `should.Not.Equal`.
@@ -246,16 +246,6 @@ end
 --
 function expect:notToBeNil(message)
   should.Not.be.Nil(self.__actual, message)
-end
-
--- #### expect:notToBeError
---
--- A wrapper for `should.Not.be.Error`.
---
--- - `message` is a string.
---
-function expect:notToBeError(message)
-  should.Not.be.Error(self.__actual, message)
 end
 
 -- #### expect:notToBeBlank
@@ -342,6 +332,16 @@ end
 --
 function expect:notToHaveProperty(expected, message)
   should.Not.have.Property(self.__actual, expected, message)
+end
+
+-- #### expect:notToHaveError
+--
+-- A wrapper for `should.Not.have.Error`.
+--
+-- - `message` is a string.
+--
+function expect:notToHaveError(message)
+  should.Not.have.Error(self.__actual, message)
 end
 
 -- ## Exports

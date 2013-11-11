@@ -134,20 +134,6 @@ function should.be.Nil(actual, message)
   assert(actual == nil, message)
 end
 
--- #### should.be.Error
---
--- Determine if `actual` returns an error.
---
--- The `message` will be displayed if the assertion fails.
---
--- - `actual`  is a function.
--- - `message` is a string.
---
-function should.be.Error(actual, message)
-  message = message or assertMsg('not error', 'error', false)
-  assert(throws(actual) == true, message)
-end
-
 -- #### should.be.Blank
 --
 -- Determine if `actual` is blank.
@@ -266,6 +252,20 @@ function should.have.Property(actual, expected, message)
   assert(property(actual, expected) == true, message)
 end
 
+-- #### should.have.Error
+--
+-- Determine if `actual` returns an error.
+--
+-- The `message` will be displayed if the assertion fails.
+--
+-- - `actual`  is a function.
+-- - `message` is a string.
+--
+function should.have.Error(actual, message)
+  message = message or assertMsg('not error', 'error', false)
+  assert(throws(actual) == true, message)
+end
+
 -- #### should.Not.Equal
 --
 -- Determine if `actual` is not equal to `expected`.
@@ -352,20 +352,6 @@ end
 function should.Not.be.Nil(actual, message)
   message = message or assertMsg(actual, 'nil', true)
   assert(actual ~= nil, message)
-end
-
--- #### should.Not.be.Error
---
--- Determine if `actual` doesn't return an error.
---
--- The `message` will be displayed if the assertion fails.
---
--- - `actual`  is a function.
--- - `message` is a string.
---
-function should.Not.be.Error(actual, message)
-  message = message or assertMsg('error', 'error', true)
-  assert(throws(actual) == false, message)
 end
 
 -- #### should.Not.be.Blank
@@ -484,6 +470,20 @@ end
 function should.Not.have.Property(actual, expected, message)
   message = message or assertMsg(expected, 'nil', false)
   assert(property(actual, expected) == false, message)
+end
+
+-- #### should.Not.have.Error
+--
+-- Determine if `actual` doesn't return an error.
+--
+-- The `message` will be displayed if the assertion fails.
+--
+-- - `actual`  is a function.
+-- - `message` is a string.
+--
+function should.Not.have.Error(actual, message)
+  message = message or assertMsg('error', 'error', true)
+  assert(throws(actual) == false, message)
 end
 
 -- ## Exports

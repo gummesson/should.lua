@@ -26,7 +26,6 @@ luarocks build https://raw.github.com/gummesson/should.lua/master/should-dev-1.r
 - `should.be.True` / `expect:toBeTrue`
 - `should.be.False` / `expect:toBeFalse`
 - `should.be.Nil` / `expect:toBeNil`
-- `should.be.Error` / `expect:toBeError`
 - `should.be.Blank` / `expect:toBeBlank`
 - `should.be.Empty` / `expect:toBeEmpty`
 - `should.be.Above` / `expect:toBeAbove`
@@ -35,6 +34,7 @@ luarocks build https://raw.github.com/gummesson/should.lua/master/should-dev-1.r
 - `should.be.Lte` / `expect:toBeLte`
 - `should.Match` / `expect:toMatch`
 - `should.have.Property` / `expect:toHaveProperty`
+- `should.have.Error` / `expect:toHaveError`
 
 ### should.Not / expect:not
 
@@ -44,7 +44,6 @@ luarocks build https://raw.github.com/gummesson/should.lua/master/should-dev-1.r
 - `should.Not.be.True` / `expect:notToBeTrue`
 - `should.Not.be.False` / `expect:notToBeFalse`
 - `should.Not.be.Nil` / `expect:notToBeNil`
-- `should.Not.be.Error` / `expect:notToBeError`
 - `should.Not.be.Blank` / `expect:notToBeBlank`
 - `should.Not.be.Empty` / `expect:notToBeEmpty`
 - `should.Not.be.Above` / `expect:notToBeAbove`
@@ -53,6 +52,7 @@ luarocks build https://raw.github.com/gummesson/should.lua/master/should-dev-1.r
 - `should.Not.be.Lte` / `expect:notToBeLte`
 - `should.Not.Match` / `expect:notToMatch`
 - `should.Not.have.Property` / `expect:notToHaveProperty`
+- `should.Not.have.Error` / `expect:notToHaveError`
 
 Check out the [API documentation](https://github.com/gummesson/should.lua/blob/master/API.md) for more information.
 

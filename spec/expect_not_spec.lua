@@ -131,14 +131,6 @@ describe('expect', function()
     end)
   end)
 
-  describe(':notToBeError()', function()
-    it('should handle non errors', function()
-      local results = function() end
-      expect(function() end):notToBeError()
-      expect(results):notToBeError()
-    end)
-  end)
-
   describe(':notToBeBlank()', function()
     it('should handle "Hello world"', function()
       local results = 'Hello world'
@@ -218,6 +210,14 @@ describe('expect', function()
       local results = {one = 1, two = 2}
       expect({one = 1, two = 2}):notToHaveProperty({three = 3})
       expect(results):notToHaveProperty({three = 3})
+    end)
+  end)
+
+  describe(':notToHaveError()', function()
+    it('should handle non errors', function()
+      local results = function() end
+      expect(function() end):notToHaveError()
+      expect(results):notToHaveError()
     end)
   end)
 end)

@@ -131,14 +131,6 @@ describe('should', function()
     end)
   end)
 
-  describe('.Not.be.Error()', function()
-    it('should handle non-errors', function()
-      local results = function() end
-      should.Not.be.Error(function() end)
-      should.Not.be.Error(results)
-    end)
-  end)
-
   describe('.Not.be.Blank()', function()
     it('should handle "Hello world"', function()
       local results = 'Hello world'
@@ -218,6 +210,14 @@ describe('should', function()
       local results = {one = 1, two = 2}
       should.Not.have.Property({one = 1, two = 2}, {three = 3})
       should.Not.have.Property(results, {three = 3})
+    end)
+  end)
+
+  describe('.Not.have.Error()', function()
+    it('should handle non-errors', function()
+      local results = function() end
+      should.Not.have.Error(function() end)
+      should.Not.have.Error(results)
     end)
   end)
 end)

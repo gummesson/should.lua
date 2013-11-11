@@ -111,14 +111,6 @@ describe('should', function()
     end)
   end)
 
-  describe('.be.Error()', function()
-    it('should handle errors', function()
-      local results = function() error('Test') end
-      should.be.Error(function() error('Test') end)
-      should.be.Error(results)
-    end)
-  end)
-
   describe('.be.Blank()', function()
     it('should handle empty strings', function()
       local results = ''
@@ -204,6 +196,14 @@ describe('should', function()
       local results = {one = 1, two = 2}
       should.have.Property({one = 1, two = 2}, {two = 2})
       should.have.Property(results, {two = 2})
+    end)
+  end)
+
+  describe('.have.Error()', function()
+    it('should handle errors', function()
+      local results = function() error('Test') end
+      should.have.Error(function() error('Test') end)
+      should.have.Error(results)
     end)
   end)
 end)

@@ -44,9 +44,9 @@ describe('should', function()
     end)
   end)
 
-  describe('.be.Error()', function()
+  describe('.have.Error()', function()
     it('should not handle non errors', function()
-      should.be.Error(function() end)
+      should.have.Error(function() end)
     end)
   end)
 
@@ -142,9 +142,9 @@ describe('should', function()
     end)
   end)
 
-  describe('.Not.be.Error()', function()
+  describe('.Not.have.Error()', function()
     it('should not handle errors', function()
-      should.Not.be.Error(function() error('Test') end)
+      should.Not.have.Error(function() error('Test') end)
     end)
   end)
 

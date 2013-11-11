@@ -113,14 +113,6 @@ describe('expect', function()
     end)
   end)
 
-  describe(':toBeError()', function()
-    it('should handle errors', function()
-      local results = function() error('Abort!') end
-      expect(function() error('Abort!') end):toBeError()
-      expect(results):toBeError()
-    end)
-  end)
-
   describe(':toBeBlank()', function()
     it('should handle \'\'', function()
       local results = ''
@@ -206,6 +198,14 @@ describe('expect', function()
       local results = {one = 1, two = 2}
       expect({one = 1, two = 2}):toHaveProperty({ two = 2 }) 
       expect(results):toHaveProperty({ two = 2 }) 
+    end)
+  end)
+
+  describe(':toHaveError()', function()
+    it('should handle errors', function()
+      local results = function() error('Abort!') end
+      expect(function() error('Abort!') end):toHaveError()
+      expect(results):toHaveError()
     end)
   end)
 end)

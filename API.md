@@ -100,22 +100,6 @@ should.be.Nil(nil)
 expect(false):toBeNil()
 ~~~
 
-### should.be.Error / expect:toBeError
-
-~~~ lua
-should.be.Error(actual[, message])
-expect(actual):toBeError([message])
-~~~
-
-Determines if `actual` returns an error.
-
-#### Example
-
-~~~ lua
-should.be.Error(function() error('Abort!') end)
-expect(function() error('Abort!') end):toBeError()
-~~~
-
 ### should.be.Blank / expect:toBeBlank
 
 ~~~ lua
@@ -249,6 +233,22 @@ should.have.Property({one = 1, two = 2}, {two = 2})
 expect({one = 1, two = 2}):toHaveProperty({two = 2})
 ~~~
 
+### should.have.Error / expect:toHaveError
+
+~~~ lua
+should.have.Error(actual[, message])
+expect(actual):toHaveError([message])
+~~~
+
+Determines if `actual` returns an error.
+
+#### Example
+
+~~~ lua
+should.have.Error(function() error('Abort!') end)
+expect(function() error('Abort!') end):toHaveError()
+~~~
+
 ### should.Not.Equal / expect:notToEqual
 
 ~~~ lua
@@ -343,22 +343,6 @@ Determines if `actual` is not `nil`.
 ~~~ lua
 should.Not.be.Nil('Hello')
 expect('Hello'):notToBeNil()
-~~~
-
-### should.Not.be.Error / expect:notToBeError
-
-~~~ lua
-should.Not.be.Error(actual[, message])
-expect(actual):notToBeError()
-~~~
-
-Determines if `actual` doesn't return an error.
-
-#### Example
-
-~~~ lua
-should.Not.be.Error(function() print('Continue!') end)
-expect(function() print('Continue!') end):notToBeError()
 ~~~
 
 ### should.Not.be.Blank / expect:notToBeBlank
@@ -492,4 +476,20 @@ expect({one = 1, two = 2}):notToHaveProperty('three')
 ~~~ lua
 should.Not.have.Property({one = 1, two = 2}, {three = 3})
 expect({one = 1, two = 2}):notToHaveProperty({three = 3})
+~~~
+
+### should.Not.have.Error / expect:notToHaveError
+
+~~~ lua
+should.Not.have.Error(actual[, message])
+expect(actual):notToHaveError()
+~~~
+
+Determines if `actual` doesn't return an error.
+
+#### Example
+
+~~~ lua
+should.Not.have.Error(function() print('Continue!') end)
+expect(function() print('Continue!') end):notToHaveError()
 ~~~
