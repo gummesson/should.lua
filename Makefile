@@ -20,4 +20,4 @@ docs:
 	@echo "Generating the documentation..."
 	@cat src/should.lua src/expect.lua src/util.lua > tmp/index.lua
 	@docco tmp/index.lua
-	@cp -r docs/ ../gh-pages/docs
+	@cp -r docs ../gh-pages/
