@@ -1,5 +1,7 @@
 # Should
 
+[![Build Status](https://travis-ci.org/gummesson/should.lua.png?branch=master)](https://travis-ci.org/gummesson/should.lua)
+
 **Should** is a small library that brings BDD-style assertions to Lua.
 
 ## Why?
