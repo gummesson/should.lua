@@ -259,6 +259,7 @@ end
 --
 -- - `actual`   is a table.
 -- - `expected` is table or a string.
+-- - `message`  is a string.
 --
 function should.have.Property(actual, expected, message)
   message = message or assertMsg('nil', expected)
@@ -478,6 +479,7 @@ end
 --
 -- - `actual`   is a table.
 -- - `expected` is table or a string.
+-- - `message`  is a string.
 --
 function should.Not.have.Property(actual, expected, message)
   message = message or assertMsg(expected, 'nil')
