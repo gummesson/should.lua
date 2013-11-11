@@ -23,22 +23,22 @@ local next, tostring     = next, tostring
 -- - `actual`   is a value.
 -- - `expected` is a value.
 --
--- - `NoEql` is an internal hack for prepending "not" to `expected`,
---   if it's a table.
+-- - `Not` is an internal hack for prepending "not" to `expected`.
 --
-function util.assertMsg(actual, expected, noEql)
+function util.assertMsg(actual, expected, Not)
   if type(actual) == 'table' then
     actual = inspect(actual)
   end
   if type(expected) == 'table' then
-    if noEql then
-      expected = 'not ' .. inspect(expected)
-    else
-      expected = inspect(expected)
-    end
+    expected = inspect(expected)
   end
-  local actMsg  = '\n' .. '  Actual: ' .. colors('%{red}' .. tostring(actual))
-  local expMsg  = '\n' .. 'Expected: ' .. colors('%{green}' .. tostring(expected))
+  expected = tostring(expected)
+  actual   = tostring(actual)
+  if Not then
+    expected = 'not ' .. expected
+  end
+  local actMsg  = '\n' .. '  Actual: ' .. colors('%{red}' .. actual)
+  local expMsg  = '\n' .. 'Expected: ' .. colors('%{green}' .. expected)
   local asrtMsg = '\n' .. actMsg .. expMsg
   return asrtMsg
 end

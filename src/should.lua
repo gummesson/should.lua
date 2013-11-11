@@ -56,7 +56,7 @@ should.Not.have = {}
 -- - `message`  is a string.
 --
 function should.Equal(actual, expected, message)
-  message = message or assertMsg(actual, expected)
+  message = message or assertMsg(actual, expected, false)
   assert(actual == expected, message)
 end
 
@@ -72,7 +72,7 @@ end
 -- - `message`  is a string.
 --
 function should.Eql(actual, expected, message)
-  message = message or assertMsg(actual, expected)
+  message = message or assertMsg(actual, expected, false)
   assert(compare(actual, expected) == true, message)
 end
 
@@ -88,7 +88,7 @@ end
 --
 function should.be.Type(actual, expected, message)
   actual  = type(actual)
-  message = message or assertMsg(actual, expected)
+  message = message or assertMsg(actual, expected, false)
   assert(actual == expected, message)
 end
 
@@ -102,7 +102,7 @@ end
 -- - `message` is a string.
 --
 function should.be.True(actual, message)
-  message = message or assertMsg(actual, true)
+  message = message or assertMsg(actual, true, false)
   assert(actual == true, message)
 end
 
@@ -116,7 +116,7 @@ end
 -- - `message` is a string.
 --
 function should.be.False(actual, message)
-  message = message or assertMsg(actual, false)
+  message = message or assertMsg(actual, false, false)
   assert(actual == false, message)
 end
 
@@ -130,7 +130,7 @@ end
 -- - `message` is a string.
 --
 function should.be.Nil(actual, message)
-  message = message or assertMsg(actual, nil)
+  message = message or assertMsg(actual, nil, false)
   assert(actual == nil, message)
 end
 
@@ -144,7 +144,7 @@ end
 -- - `message` is a string.
 --
 function should.be.Error(actual, message)
-  message = message or assertMsg('no error', 'error')
+  message = message or assertMsg('not error', 'error', false)
   assert(throws(actual) == true, message)
 end
 
@@ -158,7 +158,7 @@ end
 -- - `message` is a string.
 --
 function should.be.Blank(actual, message)
-  message = message or assertMsg(actual, '\'\' or nil')
+  message = message or assertMsg(actual, '\'\' or nil', false)
   assert(blank(actual) == true, message)
 end
 
@@ -172,7 +172,7 @@ end
 -- - `message` is a string.
 --
 function should.be.Empty(actual, message)
-  message = message or assertMsg(actual, '{ }')
+  message = message or assertMsg(actual, '{ }', false)
   assert(empty(actual) == true, message)
 end
 
@@ -187,7 +187,7 @@ end
 -- - `message`  is a string.
 --
 function should.be.Above(actual, expected, message)
-  message = message or assertMsg(actual .. ' < ' .. expected, actual .. ' > ' .. expected)
+  message = message or assertMsg(actual .. ' < ' .. expected, actual .. ' > ' .. expected, false)
   assert(above(actual, expected) == true, message)
 end
 
@@ -202,7 +202,7 @@ end
 -- - `message`  is a string.
 --
 function should.be.Gte(actual, expected, message)
-  message = message or assertMsg(actual .. ' <= ' .. expected, actual .. ' >= ' .. expected)
+  message = message or assertMsg(actual .. ' <= ' .. expected, actual .. ' >= ' .. expected, false)
   assert(gte(actual, expected) == true, message)
 end
 
@@ -217,7 +217,7 @@ end
 -- - `message` is a string.
 --
 function should.be.Below(actual, expected, message)
-  message = message or assertMsg(actual .. ' > ' .. expected, actual .. ' < ' .. expected)
+  message = message or assertMsg(actual .. ' > ' .. expected, actual .. ' < ' .. expected, false)
   assert(below(actual, expected) == true, message)
 end
 
@@ -232,7 +232,7 @@ end
 -- - `message` is a string.
 --
 function should.be.Lte(actual, expected, message)
-  message = message or assertMsg(actual .. ' >= ' .. expected, actual .. ' <= ' .. expected)
+  message = message or assertMsg(actual .. ' >= ' .. expected, actual .. ' <= ' .. expected, false)
   assert(lte(actual, expected) == true, message)
 end
 
@@ -247,7 +247,7 @@ end
 -- - `message`  is a string.
 --
 function should.Match(actual, expected, message)
-  message = message or assertMsg(actual, '/' .. expected .. '/')
+  message = message or assertMsg(actual, '/' .. expected .. '/', false)
   assert(match(actual, expected) ~= nil, message)
 end
 
@@ -262,7 +262,7 @@ end
 -- - `message`  is a string.
 --
 function should.have.Property(actual, expected, message)
-  message = message or assertMsg('nil', expected)
+  message = message or assertMsg('nil', expected, false)
   assert(property(actual, expected) == true, message)
 end
 
@@ -277,7 +277,7 @@ end
 -- - `message`  is a string.
 --
 function should.Not.Equal(actual, expected, message)
-  message = message or assertMsg(actual, expected)
+  message = message or assertMsg(actual, expected, true)
   assert(actual ~= expected, message)
 end
 
@@ -308,7 +308,7 @@ end
 --
 function should.Not.be.Type(actual, expected, message)
   actual  = type(actual)
-  message = message or assertMsg(actual, 'no ' .. expected)
+  message = message or assertMsg(actual, expected, true)
   assert(actual ~= expected, message)
 end
 
@@ -322,7 +322,7 @@ end
 -- - `message` is a string.
 --
 function should.Not.be.True(actual, message)
-  message = message or assertMsg(actual, 'not true')
+  message = message or assertMsg(actual, 'true', true)
   assert(actual ~= true, message)
 end
 
@@ -336,7 +336,7 @@ end
 -- - `message` is a string.
 --
 function should.Not.be.False(actual, message)
-  message = message or assertMsg(actual, 'not false')
+  message = message or assertMsg(actual, 'false', true)
   assert(actual ~= false, message)
 end
 
@@ -350,7 +350,7 @@ end
 -- - `message` is a string.
 --
 function should.Not.be.Nil(actual, message)
-  message = message or assertMsg(actual, 'not nil')
+  message = message or assertMsg(actual, 'nil', true)
   assert(actual ~= nil, message)
 end
 
@@ -364,7 +364,7 @@ end
 -- - `message` is a string.
 --
 function should.Not.be.Error(actual, message)
-  message = message or assertMsg('no error', 'error')
+  message = message or assertMsg('error', 'error', true)
   assert(throws(actual) == false, message)
 end
 
@@ -378,7 +378,7 @@ end
 -- - `message` is a string.
 --
 function should.Not.be.Blank(actual, message)
-  message = message or assertMsg(actual, 'not \'\' or nil')
+  message = message or assertMsg(actual, '\'\' or nil', true)
   assert(blank(actual) == false, message)
 end
 
@@ -392,7 +392,7 @@ end
 -- - `message` is a string.
 --
 function should.Not.be.Empty(actual, message)
-  message = message or assertMsg(actual, 'not empty')
+  message = message or assertMsg(actual, 'empty', true)
   assert(empty(actual) == false, message)
 end
 
@@ -407,7 +407,7 @@ end
 -- - `message`  is a string.
 --
 function should.Not.be.Above(actual, expected, message)
-  message = message or assertMsg(actual .. ' > ' .. expected, actual .. ' < ' .. expected)
+  message = message or assertMsg(actual .. ' > ' .. expected, actual .. ' < ' .. expected, false)
   assert(above(actual, expected) == false, message)
 end
 
@@ -422,7 +422,7 @@ end
 -- - `message`  is a string.
 --
 function should.Not.be.Gte(actual, expected, message)
-  message = message or assertMsg(actual .. ' >= ' .. expected, actual .. ' <= ' .. expected)
+  message = message or assertMsg(actual .. ' >= ' .. expected, actual .. ' <= ' .. expected, false)
   assert(gte(actual, expected) == false, message)
 end
 
@@ -437,7 +437,7 @@ end
 -- - `message`  is a string.
 --
 function should.Not.be.Below(actual, expected, message)
-  message = message or assertMsg(actual .. ' < ' .. expected, actual .. ' > ' .. expected)
+  message = message or assertMsg(actual .. ' < ' .. expected, actual .. ' > ' .. expected, false)
   assert(below(actual, expected) == false, message)
 end
 
@@ -452,7 +452,7 @@ end
 -- - `message`  is a string.
 --
 function should.Not.be.Lte(actual, expected, message)
-  message = message or assertMsg(actual .. ' <= ' .. expected, actual .. ' >= ' .. expected)
+  message = message or assertMsg(actual .. ' <= ' .. expected, actual .. ' >= ' .. expected, false)
   assert(lte(actual, expected) == false, message)
 end
 
@@ -467,7 +467,7 @@ end
 -- - `message`  is a string.
 --
 function should.Not.Match(actual, expected, message)
-  message = message or assertMsg(actual, 'not /' .. expected .. '/')
+  message = message or assertMsg(actual, '/' .. expected .. '/', true)
   assert(match(actual, expected) == nil, message)
 end
 
@@ -482,7 +482,7 @@ end
 -- - `message`  is a string.
 --
 function should.Not.have.Property(actual, expected, message)
-  message = message or assertMsg(expected, 'nil')
+  message = message or assertMsg(expected, 'nil', false)
   assert(property(actual, expected) == false, message)
 end
 
