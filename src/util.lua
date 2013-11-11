@@ -23,7 +23,7 @@ local next, tostring     = next, tostring
 -- - `actual`   is a value.
 -- - `expected` is a value.
 --
--- - `NoEql` is an internal hack for appending "not" to `expected`
+-- - `NoEql` is an internal hack for prepending "not" to `expected`,
 --   if it's a table.
 --
 function util.assertMsg(actual, expected, noEql)
