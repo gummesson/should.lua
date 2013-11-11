@@ -4,9 +4,11 @@
 
 **Should** is a small library that brings BDD-style assertions to Lua.
 
+It's designed to be a companion to [Busted](https://github.com/Olivine-Labs/busted), but should work independently too.
+
 ## Why?
 
-I love [Busted](https://github.com/Olivine-Labs/busted) but I'm not a fan of the word "assert".
+I love Busted but I'm not a fan of the word "assert".
 
 ## Assertions
 
